@@ -1,0 +1,46 @@
+var ball;
+
+function setup(){
+	createCanvas(500, 500);
+	ball = new Ball();
+}
+
+function draw(){
+	background(0);
+	ball.show();
+	ball.move();
+	ball.bounce();
+}
+
+function Ball(){
+	this.x = 20;
+	this.y = 100;
+	this.r = 10;
+
+	this.xSpeed = random(-10, 10);
+	this.ySpeed = random(-10, 10);
+
+
+	this.show = function(){
+		ellipse(this.x, this.y, this.r*2, this.r*2);
+	}
+
+	this.move = function(){
+		this.x += this.xSpeed;
+		this.y += this.ySpeed;
+	}
+
+	this.bounce = function(){
+		if(this.x > width || this.x < 0){
+			this.xSpeed *= -1
+			fill(random(0,255), random(0,255), random(0,255));
+			this.r += 5;
+		}
+
+		if(this.y > height || this.y < 0){
+			this.ySpeed *= -1;
+			fill(random(0,255), random(0,255), random(0,255));
+			this.r -= 2;
+		}
+	}
+}
