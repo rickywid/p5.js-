@@ -1,0 +1,57 @@
+/*
+
+Launch a ball in any direction and use gravity to make the ball fall down. Make the ball bounce as it hits the surface before coming to
+a complete stop.
+
+*.
+
+var ball;
+var clicked = false;
+
+function setup(){
+	createCanvas(1200, 500);
+}
+
+function draw(){
+	background(0);
+
+	if(clicked){
+		ball.show();
+	}
+}
+
+function mouseClicked(){
+
+	ball = new Ball();
+	clicked = true;
+}
+
+function Ball(){
+	this.x = mouseX;
+	this.y = mouseY;
+	this.r = 10;
+
+	this.xSpeed = random(-10, 10);
+
+	this.gravity = 1;
+	this.velocity = random(-20, -35);
+
+	this.show = function(){
+		
+		ellipse(this.x, this.y, this.r*2, this.r*2);
+
+		this.velocity += this.gravity;
+		this.y += this.velocity;
+
+		if(this.y >= height){
+			this.y = height;
+			this.velocity *= -0.5;
+		} else {
+			this.x += this.xSpeed;
+		}
+
+		if(this.x >= width || this.x <= 0){
+			this.xSpeed *= -1;
+		}
+	}
+}
